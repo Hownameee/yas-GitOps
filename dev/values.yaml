@@ -1,0 +1,129 @@
+global:
+  domain: yas.local.com
+  envTag: dev-52
+  image:
+    tag: latest
+
+# Ghi chú: Nếu bạn đang sử dụng Umbrella Chart (hoặc ApplicationSet), 
+# ArgoCD sẽ tự động truyền các giá trị này xuống tất cả các subcharts.
+
+# Cấu hình tag cho từng service riêng lẻ
+backoffice-bff:
+  backend:
+    image:
+      tag: latest
+backoffice-ui:
+  ui:
+    image:
+      tag: latest
+cart:
+  backend:
+    image:
+      tag: latest
+customer:
+  backend:
+    image:
+      tag: latest
+inventory:
+  backend:
+    image:
+      tag: latest
+location:
+  backend:
+    image:
+      tag: latest
+media:
+  backend:
+    image:
+      tag: latest
+order:
+  backend:
+    image:
+      tag: latest
+payment:
+  backend:
+    image:
+      tag: latest
+payment-paypal:
+  backend:
+    image:
+      tag: latest
+product:
+  backend:
+    image:
+      tag: latest
+promotion:
+  backend:
+    image:
+      tag: latest
+rating:
+  backend:
+    image:
+      tag: latest
+recommendation:
+  backend:
+    image:
+      tag: latest
+sampledata:
+  backend:
+    image:
+      tag: latest
+search:
+  backend:
+    image:
+      tag: latest
+storefront-bff:
+  backend:
+    image:
+      tag: latest
+storefront-ui:
+  ui:
+    image:
+      tag: latest
+tax:
+  backend:
+    image:
+      tag: latest
+webhook:
+  backend:
+    image:
+      tag: latest
+
+# Cấu hình Data Layer (Postgres, Kafka, Keycloak, etc.)
+postgresql:
+  replicas: 1
+  username: yasadminuser
+  password: admin
+pgadmin:
+  hostname: pgadmin-dev-52.yas.local.com
+zookeeper: {}
+kafka-cluster:
+  kafka:
+    replicas: 1
+  zookeeper:
+    replicas: 1
+  postgresql:
+    username: yasadminuser
+    password: admin
+akhq:
+  hostname: akhq-dev-52.yas.local.com
+elasticsearch-cluster:
+  elasticsearch:
+    replicas: 1
+  kibana:
+    ingress:
+      hostname: kibana-dev-52.yas.local.com
+redis:
+  auth:
+    password: redis
+keycloak:
+  hostname: identity-dev-52.yas.local.com
+  postgresql:
+    username: yasadminuser
+    password: admin
+  bootstrapAdmin:
+    username: admin
+    password: admin
+  backofficeRedirectUrl: https://backoffice-dev-52.yas.local.com
+  storefrontRedirectUrl: https://storefront-dev-52.yas.local.com
+  apiRedirectUrl: https://api-dev-52.yas.local.com

@@ -1,0 +1,129 @@
+global:
+  domain: yas.local.com
+  envTag: staging
+  image:
+    tag: rc_v1.0.0
+
+# Ghi chú: Nếu bạn đang sử dụng Umbrella Chart (hoặc ApplicationSet), 
+# ArgoCD sẽ tự động truyền các giá trị này xuống tất cả các subcharts.
+
+# Cấu hình tag cho từng service riêng lẻ
+backoffice-bff:
+  backend:
+    image:
+      tag: rc_v1.0.0
+backoffice-ui:
+  ui:
+    image:
+      tag: rc_v1.0.0
+cart:
+  backend:
+    image:
+      tag: rc_v1.0.0
+customer:
+  backend:
+    image:
+      tag: rc_v1.0.0
+inventory:
+  backend:
+    image:
+      tag: rc_v1.0.0
+location:
+  backend:
+    image:
+      tag: rc_v1.0.0
+media:
+  backend:
+    image:
+      tag: rc_v1.0.0
+order:
+  backend:
+    image:
+      tag: rc_v1.0.0
+payment:
+  backend:
+    image:
+      tag: rc_v1.0.0
+payment-paypal:
+  backend:
+    image:
+      tag: rc_v1.0.0
+product:
+  backend:
+    image:
+      tag: rc_v1.0.0
+promotion:
+  backend:
+    image:
+      tag: rc_v1.0.0
+rating:
+  backend:
+    image:
+      tag: rc_v1.0.0
+recommendation:
+  backend:
+    image:
+      tag: rc_v1.0.0
+sampledata:
+  backend:
+    image:
+      tag: rc_v1.0.0
+search:
+  backend:
+    image:
+      tag: rc_v1.0.0
+storefront-bff:
+  backend:
+    image:
+      tag: rc_v1.0.0
+storefront-ui:
+  ui:
+    image:
+      tag: rc_v1.0.0
+tax:
+  backend:
+    image:
+      tag: rc_v1.0.0
+webhook:
+  backend:
+    image:
+      tag: rc_v1.0.0
+
+# Cấu hình Data Layer (Postgres, Kafka, Keycloak, etc.)
+postgresql:
+  replicas: 1
+  username: yasadminuser
+  password: admin
+pgadmin:
+  hostname: pgadmin-staging.yas.local.com
+zookeeper: {}
+kafka-cluster:
+  kafka:
+    replicas: 1
+  zookeeper:
+    replicas: 1
+  postgresql:
+    username: yasadminuser
+    password: admin
+akhq:
+  hostname: akhq-staging.yas.local.com
+elasticsearch-cluster:
+  elasticsearch:
+    replicas: 1
+  kibana:
+    ingress:
+      hostname: kibana-staging.yas.local.com
+redis:
+  auth:
+    password: redis
+keycloak:
+  hostname: identity-staging.yas.local.com
+  postgresql:
+    username: yasadminuser
+    password: admin
+  bootstrapAdmin:
+    username: admin
+    password: admin
+  backofficeRedirectUrl: https://backoffice-staging.yas.local.com
+  storefrontRedirectUrl: https://storefront-staging.yas.local.com
+  apiRedirectUrl: https://api-staging.yas.local.com
