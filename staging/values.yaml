@@ -107,11 +107,11 @@ akhq:
     ingressClassName: nginx
     annotations:
       argocd.argoproj.io/sync-wave: "-20"
+    paths:
+      - /
+    pathType: Prefix
     hosts:
-      - host: akhq-staging.yas.local.com
-        paths:
-          - path: /
-            pathType: Prefix
+      - akhq-staging.yas.local.com
   configuration:
     akhq:
       server:
