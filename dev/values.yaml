@@ -4,10 +4,6 @@ global:
   image:
     tag: latest
 
-# Ghi chú: Nếu bạn đang sử dụng Umbrella Chart (hoặc ApplicationSet), 
-# ArgoCD sẽ tự động truyền các giá trị này xuống tất cả các subcharts.
-
-# Cấu hình tag cho từng service riêng lẻ
 backoffice-bff:
   backend:
     image:
@@ -106,7 +102,29 @@ kafka-cluster:
     username: yasadminuser
     password: admin
 akhq:
-  hostname: akhq-dev-52.yas.local.com
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      argocd.argoproj.io/sync-wave: "-20"
+    hosts:
+      - host: akhq-dev-52.yas.local.com
+        paths:
+          - path: /
+            pathType: Prefix
+  configuration:
+    akhq:
+      server:
+        access-log:
+          enabled: false
+          name: org.akhq.log.access
+      connections:
+        kafka-connection:
+          properties:
+            bootstrap.servers: kafka-cluster-kafka-bootstrap:9092
+          connect:
+            - name: debezium-connect-cluster
+              url: http://debezium-connect-cluster-connect-api:8083
 elasticsearch-cluster:
   elasticsearch:
     replicas: 1
